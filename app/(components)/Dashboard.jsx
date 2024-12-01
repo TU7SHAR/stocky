@@ -1,6 +1,7 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import Details from "./Details";
+import Analysis from "./Analysis";
 import Overview from "./Overview";
 import Chart from "./Charts";
 import StockContext from "../context/StockContext";
@@ -14,6 +15,7 @@ import {
   convertDateToUnixTimestamp,
 } from "../helpers/date-helpers.js";
 import TradingViewWidget from "./TradingViewWidget";
+import TradePlanner from "./TradePlanner";
 
 export default function Dashboard() {
   const { stockSymbol } = useContext(StockContext);
@@ -70,28 +72,42 @@ export default function Dashboard() {
   }, [stockSymbol]);
 
   return (
-    <div className="text-white h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-8 md:grid-rows-7 xl:grid-rows-5 auto-rows-fr gap-6 p-10 font-thin">
-      <div className="col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center">
-        <h1 className="text-5xl">
-          {stockDetails.name || `Api Resource Denied`}
-        </h1>
+    <>
+      <div className="text-white min-h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-8 md:grid-rows-7 xl:grid-rows-5 auto-rows-fr gap-6 p-10 font-thin">
+        <div className="col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center">
+          <h1 className="text-5xl">
+            {stockDetails.name || `Api Resource Denied`}
+          </h1>
+        </div>
+        <div className="md:col-span-2 md:row-span-4 row-span-3">
+          <TradingViewWidget symbol={stockSymbol} />
+        </div>
+        <div className="row-span-1 xl:row-span-1">
+          <Overview
+            symbol={stockSymbol}
+            price={quote.pc}
+            change={quote.d}
+            changePercent={quote.dp}
+            currency={stockDetails.currency}
+          />
+        </div>
+        <div className="row-span-3 xl:row-span-3">
+          <Details details={stockDetails} />
+        </div>
       </div>
-      <div className="md:col-span-2 row-span-4">
-        <TradingViewWidget symbol={stockSymbol} />
+      <div className="text-white text-thin grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 grid-rows-4  md:grid-rows-3 xl:grid-rows-4 auto-rows-fr gap-6 p-10">
+        <div className="col-span-1 md:col-span-3 xl:col-span-4 row-span-1 md:row-span-3 flex justify-start items-center">
+          <Analysis symbol={stockSymbol} price={quote.pc} change={quote.d} />
+        </div>
+        <div className="col-span-1 md:col-span-3 xl:col-span-4 row-span-2 md:row-span-4 flex justify-start items-center">
+          <TradePlanner
+            symbol={stockDetails.name}
+            price={quote.pc}
+            change={quote.d}
+          />
+        </div>
       </div>
-      <div>
-        <Overview
-          symbol={stockSymbol}
-          price={quote.pc}
-          change={quote.d}
-          changePercent={quote.dp}
-          currency={stockDetails.currency}
-        />
-      </div>
-      <div className="row-span-2 xl:row-span-3">
-        <Details details={stockDetails} />
-      </div>
-    </div>
+    </>
   );
 }
 // <Chart data={chartData} />;

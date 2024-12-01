@@ -12,7 +12,10 @@ export default function Home() {
   return (
     <>
       <StockContext.Provider value={{ stockSymbol, setStockSymbol }}>
-        <Navbar />
+        <div className="md:block hidden">
+          <Navbar />
+        </div>
+
         <Dashboard />
         <Footer />
       </StockContext.Provider>

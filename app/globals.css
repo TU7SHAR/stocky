@@ -39,3 +39,18 @@ body {
   scrollbar-color: #2d3d63 transparent;
   /* scrollbar-width: thin; */
 }
+
+.bubble {
+  animation: bubble-animation 0.5s ease-in-out;
+}
+
+@keyframes bubble-animation {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

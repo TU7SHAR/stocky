@@ -136,7 +136,7 @@ export default function TradePlanner({ symbol, price, change }) {
               <div className="text-xl flex justify-between items-center">
                 <span className="font-semibold">View:</span>
                 <p className="font-thin">
-                  {price !== "Api Denied" ? "Positive" : price}
+                  {price !== "Api Denied" ? "Negative" : price}
                 </p>
               </div>
             </div>

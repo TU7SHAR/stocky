@@ -23,15 +23,6 @@ export default function Navbar() {
           <div className="bubble bg-[#191f31] text-white px-3 py-1 rounded-full">
             Tushar
           </div>
-          <div className="bubble bg-[#191f31] text-white px-3 py-1 rounded-full">
-            Sunil
-          </div>
-          <div className="bubble bg-[#191f31] text-white px-3 py-1 rounded-full">
-            Suhani
-          </div>
-          <div className="bubble bg-[#191f31] text-white px-3 py-1 rounded-full">
-            Suryanshi
-          </div>
         </div>
       )}
     </nav>
